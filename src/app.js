@@ -15,5 +15,15 @@ app.use(express.json());
 await connectDB();
 
 app.use("/api/users", userRoutes);
+// Root route
+app.get('/', (req, res) => {
+  res.send('🚀 API is running...');
+});
+
+// Handle 404
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
+
 
 export default app;
