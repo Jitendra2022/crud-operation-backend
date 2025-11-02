@@ -2,7 +2,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { connectDB } from "./config/db.js";
+import  connectDB  from "./config/db.js";
 import userRoutes from "./routes/user.routes.js";
 
 dotenv.config();
@@ -12,7 +12,9 @@ app.use(cors());
 app.use(express.json());
 
 // Connect DB before defining routes (important)
-await connectDB();
+connectDB()
+  .then(() => console.log('✅ MongoDB connected'))
+  .catch((err) => console.error('❌ MongoDB connection error:', err.message));
 
 app.use("/api/users", userRoutes);
 // Root route
